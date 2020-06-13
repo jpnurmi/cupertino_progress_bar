@@ -160,10 +160,6 @@ class _CupertinoProgressBarRenderObjectWidget extends LeafRenderObjectWidget {
 const double _kPadding = 0.0;
 const double _kBarHeight = 2.0;
 const double _kBarWidth = 176.0; // Matches Material Design slider.
-const Duration _kDiscreteTransitionDuration = Duration(milliseconds: 500);
-
-const double _kAdjustmentUnit =
-    0.1; // Matches iOS implementation of material slider.
 
 class _RenderCupertinoProgressBar extends RenderConstrainedBox {
   _RenderCupertinoProgressBar({
