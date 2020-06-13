@@ -9,6 +9,22 @@ A progress bar includes a track that fills from left to right to show the progre
 a known duration. Progress bars are non-interactive, although they are often accompanied by a button
 for canceling the corresponding operation.
 
+## Screenshots
+
+| Light | Dark |
+|:---:|:---:|
+| ![Light CupertinoProgressBar](https://raw.githubusercontent.com/jpnurmi/cupertino_progress_bar/master/doc/images/light.png "Light CupertinoProgressBar") | ![Dark CupertinoProgressBar](https://raw.githubusercontent.com/jpnurmi/cupertino_progress_bar/master/doc/images/dark.png "Dark CupertinoProgressBar") |
+
+## Example
+
+```dart
+CupertinoProgressBar(
+  value: 0.77,
+)
+```
+
+## Guidelines
+
 Always report progress accurately. Don’t display inaccurate progress information just to make your
 app appear busy. Only use progress bars for tasks that are quantifiable. Otherwise, use an activity
 indicator.
@@ -28,16 +44,6 @@ track and fill.
 See also:
  * <https://api.flutter.dev/flutter/cupertino/CupertinoActivityIndicator-class.html>
  * <https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/>
-
-## Screenshots
-
-### Horizontal
-
-![Light CupertinoProgressBar](https://raw.githubusercontent.com/jpnurmi/cupertino_progress_bar/master/doc/images/light.png "Light CupertinoProgressBar")
-
-### Vertical
-
-![Dark CupertinoProgressBar](https://raw.githubusercontent.com/jpnurmi/cupertino_progress_bar/master/doc/images/dark.png "Dark CupertinoProgressBar")
 
 ## Usage
 
