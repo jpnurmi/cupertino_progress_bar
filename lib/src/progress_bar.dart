@@ -30,13 +30,13 @@ class CupertinoProgressBar extends StatefulWidget {
   /// bar for screen reading software. The [semanticsValue] property may be used
   /// for determinate progress indicators to indicate how much progress has been made.
   const CupertinoProgressBar({
-    Key key,
+    Key? key,
     this.value = 0.0,
     this.trackColor = CupertinoColors.systemFill,
     this.valueColor,
     this.semanticsLabel,
     this.semanticsValue,
-  })  : assert(value != null && value >= 0.0 && value <= 1.0),
+  })  : assert(value >= 0.0 && value <= 1.0),
         super(key: key);
 
   /// The value of this progress bar.
@@ -47,18 +47,18 @@ class CupertinoProgressBar extends StatefulWidget {
   /// The progress bar's background color.
   ///
   /// The [CupertinoColors.systemFill] color by default.
-  final Color trackColor;
+  final Color? trackColor;
 
   /// The progress bar's value color.
   ///
   /// The current theme's [CupertinoThemeData.primaryColor] by default.
-  final Color valueColor;
+  final Color? valueColor;
 
   /// {@macro flutter.material.progressIndicator.semanticsLabel}
-  final String semanticsLabel;
+  final String? semanticsLabel;
 
   /// {@macro flutter.material.progressIndicator.semanticsValue}
-  final String semanticsValue;
+  final String? semanticsValue;
 
   @override
   _CupertinoProgressBarState createState() => _CupertinoProgressBarState();
@@ -67,10 +67,8 @@ class CupertinoProgressBar extends StatefulWidget {
 class _CupertinoProgressBarState extends State<CupertinoProgressBar> {
   @override
   Widget build(BuildContext context) {
-    String expandedSemanticsValue = widget.semanticsValue;
-    if (widget.value != null) {
-      expandedSemanticsValue ??= '${(widget.value * 100).round()}%';
-    }
+    String? expandedSemanticsValue = widget.semanticsValue;
+    expandedSemanticsValue ??= '${(widget.value * 100).round()}%';
     return Semantics(
       label: widget.semanticsLabel,
       value: expandedSemanticsValue,
@@ -81,7 +79,7 @@ class _CupertinoProgressBarState extends State<CupertinoProgressBar> {
           context,
         ),
         trackColor: CupertinoDynamicColor.resolve(
-          widget.trackColor,
+          widget.trackColor ?? Color(0x00000000),
           context,
         ),
       ),
@@ -97,15 +95,15 @@ class _CupertinoProgressBarState extends State<CupertinoProgressBar> {
 
 class _CupertinoProgressBarRenderObjectWidget extends LeafRenderObjectWidget {
   const _CupertinoProgressBarRenderObjectWidget({
-    Key key,
-    this.value,
+    Key? key,
+    required this.value,
     this.valueColor,
     this.trackColor,
   }) : super(key: key);
 
   final double value;
-  final Color valueColor;
-  final Color trackColor;
+  final Color? valueColor;
+  final Color? trackColor;
 
   @override
   _RenderCupertinoProgressBar createRenderObject(BuildContext context) {
@@ -134,12 +132,11 @@ const double _kBarWidth = 176.0; // Matches Material Design slider.
 
 class _RenderCupertinoProgressBar extends RenderConstrainedBox {
   _RenderCupertinoProgressBar({
-    @required double value,
-    Color valueColor,
-    Color trackColor,
-    @required TextDirection textDirection,
-  })  : assert(value != null && value >= 0.0 && value <= 1.0),
-        assert(textDirection != null),
+    required double value,
+    Color? valueColor,
+    Color? trackColor,
+    required TextDirection textDirection,
+  })   : assert(value >= 0.0 && value <= 1.0),
         _value = value,
         _valueColor = valueColor,
         _trackColor = trackColor,
@@ -151,24 +148,24 @@ class _RenderCupertinoProgressBar extends RenderConstrainedBox {
   double get value => _value;
   double _value;
   set value(double newValue) {
-    assert(newValue != null && newValue >= 0.0 && newValue <= 1.0);
+    assert(newValue >= 0.0 && newValue <= 1.0);
     if (newValue == _value) return;
     _value = newValue;
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
-  Color get valueColor => _valueColor;
-  Color _valueColor;
-  set valueColor(Color value) {
+  Color? get valueColor => _valueColor;
+  Color? _valueColor;
+  set valueColor(Color? value) {
     if (value == _valueColor) return;
     _valueColor = value;
     markNeedsPaint();
   }
 
-  Color get trackColor => _trackColor;
-  Color _trackColor;
-  set trackColor(Color value) {
+  Color? get trackColor => _trackColor;
+  Color? _trackColor;
+  set trackColor(Color? value) {
     if (value == _trackColor) return;
     _trackColor = value;
     markNeedsPaint();
@@ -177,7 +174,6 @@ class _RenderCupertinoProgressBar extends RenderConstrainedBox {
   TextDirection get textDirection => _textDirection;
   TextDirection _textDirection;
   set textDirection(TextDirection value) {
-    assert(value != null);
     if (_textDirection == value) return;
     _textDirection = value;
     markNeedsPaint();
@@ -185,8 +181,8 @@ class _RenderCupertinoProgressBar extends RenderConstrainedBox {
 
   double get _trackLeft => _kPadding;
   double get _trackRight => size.width - _kPadding;
-  double get _thumbCenter {
-    double visualPosition;
+  double? get _thumbCenter {
+    double? visualPosition;
     switch (textDirection) {
       case TextDirection.rtl:
         visualPosition = 1.0 - _value;
@@ -200,9 +196,9 @@ class _RenderCupertinoProgressBar extends RenderConstrainedBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    double visualPosition;
-    Color leftColor;
-    Color rightColor;
+    double? visualPosition;
+    Color? leftColor;
+    Color? rightColor;
     switch (textDirection) {
       case TextDirection.rtl:
         visualPosition = 1.0 - _value;
@@ -221,7 +217,7 @@ class _RenderCupertinoProgressBar extends RenderConstrainedBox {
     final double trackTop = max(0, trackCenter - 1.0);
     final double trackBottom = min(offset.dy + size.height, trackCenter + 1.0);
     final double trackRight = offset.dx + _trackRight;
-    final double trackActive = offset.dx + _thumbCenter;
+    final double trackActive = offset.dx + _thumbCenter!;
 
     final Canvas canvas = context.canvas;
 
