@@ -3,7 +3,7 @@
 [![pub](https://img.shields.io/pub/v/cupertino_progress_bar.svg)](https://pub.dev/packages/cupertino_progress_bar)
 [![license: BSD](https://img.shields.io/badge/license-BSD-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![build](https://github.com/jpnurmi/cupertino_progress_bar/workflows/build/badge.svg)
-[![codecov](https://codecov.io/gh/jpnurmi/cupertino_progress_bar/branch/master/graph/badge.svg)](https://codecov.io/gh/jpnurmi/cupertino_progress_bar)
+[![codecov](https://codecov.io/gh/jpnurmi/cupertino_progress_bar/branch/main/graph/badge.svg)](https://codecov.io/gh/jpnurmi/cupertino_progress_bar)
 
 A progress bar includes a track that fills from left to right to show the progression of a task with
 a known duration. Progress bars are non-interactive, although they are often accompanied by a button
